@@ -12,8 +12,11 @@ struct MemoryGame<CardContent> {
             cards.append(Card(id: pairIndex * 2, isFacedUp: true, isMatched: false, content: content))
             cards.append(Card(id: pairIndex * 2 + 1, isFacedUp: true, isMatched: false, content: content))
         }
+        // random order of cards:
+        cards.shuffle()
     }
     
+    // inout
     func choose(card: Card) {
         // card.choose()
         print("Card \(card) was changed. Now isFacedUp became \(card.isFacedUp)")

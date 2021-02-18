@@ -9,6 +9,7 @@ class EmojiMemoryGame {
     // 'static' because should be called before an initialization
     static func createMemoryGame() -> MemoryGame<String> {
         let emojiSet: Array<String> = ["🎃", "👻", "🧙‍♂️", "🧟‍♂️", "🧛‍♂️", "🕷"]
+        // then initalize with contentFactory:
         return MemoryGame<String>(numberOfPairOfCards: 3) { pairIndex in
             return emojiSet[pairIndex % emojiSet.count]
         }
