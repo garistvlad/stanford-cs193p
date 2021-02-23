@@ -2,9 +2,10 @@
 import SwiftUI
 
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     // make model inaccessable for the outside world:
-    private var model: MemoryGame<String> = createMemoryGame()
+    // @Published is not enough to make it observable from View. Just mark viewModel as @ObservedObject
+    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     // 'static' because should be called before an initialization
     static func createMemoryGame() -> MemoryGame<String> {
@@ -15,6 +16,8 @@ class EmojiMemoryGame {
         }
     }
     
+    // No need to define, we already get it for free via "ObservableObject" : var objectWillChange: ObservableObjectPublisher
+    
     var cards: Array<MemoryGame<String>.Card> {
         model.cards
     }
@@ -22,6 +25,7 @@ class EmojiMemoryGame {
     // MARK: - intent(s)
     
     func choose(card: MemoryGame<String>.Card) {
+        // no need for this: objectWillChange.send(), just use @Published wrapper for overall model
         model.choose(card: card)
     }
 }
